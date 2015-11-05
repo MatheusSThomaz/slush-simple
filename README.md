@@ -1,0 +1,2 @@
+# slush-simple
+Slush generator
