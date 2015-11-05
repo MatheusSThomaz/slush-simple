@@ -1,14 +1,13 @@
-var gulp      = require('gulp'),
-  less        = require('gulp-less'),
-  cssmin      = require('gulp-cssmin'),
-  browserSync = require('browser-sync'),
-  reload      = browserSync.reload,
-  uglify      = require('gulp-uglify'),
-  concat      = require('gulp-concat'),
-  changed     = require('gulp-changed'),
-  runSequence = require('run-sequence'),
-  plumber     = require('gulp-plumber'),
-  gutil       = require('gulp-util');
+var gulp        = require('gulp'),
+    less        = require('gulp-less'),
+    cssmin      = require('gulp-cssmin'),
+    browserSync = require('browser-sync'),
+    reload      = browserSync.reload,
+    uglify      = require('gulp-uglify'),
+    concat      = require('gulp-concat'),
+    changed     = require('gulp-changed'),
+    runSequence = require('run-sequence'),
+    plumber     = require('gulp-plumber');
 
 var path = {
   js: ['dev/assets/js/**/*.js', '!dev/assets/js/**/*.min.js'],
@@ -23,7 +22,12 @@ gulp.task('less', function () {
     .pipe(changed('dev/assets/css/'))
     .pipe(plumber({
       errorHandler: function (err) {
-        console.log(err);
+        console.log([
+          'Errrroou!',
+          'Mensagem: ' + err.message + '',
+          ' Arquivo: ' + err.fileName + '',
+          '   Linha: ' + err.lineNumber + '',
+        ].join('\n'));
         this.emit('end');
       }
     }))
@@ -54,14 +58,24 @@ gulp.task('watch', function () {
 gulp.task('js:build', function () {
   return gulp.src(path.js)
     .pipe(uglify({outSourceMap: true}))
-    .on('error', gutil.log)
+    .pipe(plumber({
+      errorHandler: function (err) {
+        console.log([
+          'Errrroou!',
+          'Mensagem: ' + err.message + '',
+          ' Arquivo: ' + err.fileName + '',
+          '   Linha: ' + err.lineNumber + '',
+        ].join('\n'));
+        this.emit('end');
+      }
+    }))
     .pipe(gulp.dest('build/assets/js/'));
 });
 
 gulp.task('move:build', function () {
-  return gulp.src([ 
+  return gulp.src([
     'dev/**',
-    '!dev/assets/less', 
+    '!dev/assets/less',
     '!dev/assets/less/**/*.less',
     '!dev/assets/js',
     '!dev/assets/js/**/*.js'

@@ -1,6 +1,3 @@
-# Base web gulp
-Base para desenvolvimento utilizando Gulp
-
 ## Dependências
 	node
 
@@ -9,5 +6,5 @@ Base para desenvolvimento utilizando Gulp
 	npm install
 
 ## Utilizando
-	'gulp': 
-	'gulp build': 
+	'gulp': Inicia o projeto para desenvolvimento
+	'gulp build': Gera os arquivos minificados para publicação
