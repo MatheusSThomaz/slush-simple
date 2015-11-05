@@ -1,6 +1,6 @@
 /*
- * slush-simple
- * https://github.com/MatheusSThomaz/slush-simple
+ * slush-simple-project
+ * https://github.com/MatheusSThomaz/slush-simple-project
  *
  * Copyright (c) 2015, Matheus Thomaz
  * Licensed under the MIT license.
