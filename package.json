@@ -2,22 +2,22 @@
   "name": "slush-simple-project",
   "description": "Simple slush generator",
   "version": "0.2.0",
-  "homepage": "https://github.com/MatheusSThomaz/slush-simple-project",
+  "homepage": "https://github.com/msthomaz/slush-simple-project",
   "author": {
     "name": "Matheus Thomaz",
     "email": "contato@msthomaz.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/MatheusSThomaz/slush-simple-project.git"
+    "url": "git://github.com/msthomaz/slush-simple-project.git"
   },
   "bugs": {
-    "url": "https://github.com/MatheusSThomaz/slush-simple-project/issues"
+    "url": "https://github.com/msthomaz/slush-simple-project/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/MatheusSThomaz/slush-simple-project/blob/master/LICENSE"
+      "url": "https://github.com/msthomaz/slush-simple-project/blob/master/LICENSE"
     }
   ],
   "main": "slushfile.js",

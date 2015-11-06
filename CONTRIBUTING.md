@@ -97,7 +97,7 @@ project:
    # Navigate to the newly cloned directory
    cd slush-ag2nurun-gulp
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/MatheusSThomaz/slush-ag2nurun-gulp
+   git remote add upstream https://github.com/msthomaz/slush-ag2nurun-gulp
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
