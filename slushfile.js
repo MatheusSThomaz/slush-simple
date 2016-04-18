@@ -2,7 +2,7 @@
  * slush-simple-project
  * https://github.com/msthomaz/slush-simple-project
  *
- * Copyright (c) 2015, Matheus Thomaz
+ * Copyright (c) 2016, Matheus Thomaz
  * Licensed under the MIT license.
  */
 

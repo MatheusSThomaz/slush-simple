@@ -7,15 +7,25 @@ var gulp        = require('gulp'),
     concat      = require('gulp-concat'),
     changed     = require('gulp-changed'),
     runSequence = require('run-sequence'),
-    plumber     = require('gulp-plumber');
+    plumber     = require('gulp-plumber'),
+    spritesmith = require('gulp.spritesmith');
 
 var path = {
   js: ['dev/assets/js/**/*.js', '!dev/assets/js/**/*.min.js'],
   less: ['dev/assets/less/**/*.less'],
   css: ['dev/assets/css/**/*.css', '!dev/assets/css/**/*.min.css'],
-  img: ['dev/assets/img/*'],
+  img: ['dev/assets/img/**/*'],
   html: ['dev/**/*.html']
 };
+
+gulp.task('sprite', function () {
+  var spriteData = gulp.src('assets/img/partials/*.png')
+  .pipe(spritesmith({
+    imgName: 'sprite.png',
+    cssName: 'sprite.css'
+  }));
+  return spriteData.pipe(gulp.dest('assets/img/'));
+});
 
 gulp.task('less', function () {
   return gulp.src(path.less)
