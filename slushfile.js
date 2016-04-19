@@ -8,34 +8,48 @@
 
 'use strict';
 
-var gulp        = require('gulp'),
-    install     = require('gulp-install'),
-    conflict    = require('gulp-conflict'),
-    template    = require('gulp-template'),
-    rename      = require('gulp-rename'),
-    _           = require('underscore.string'),
-    inquirer    = require('inquirer');
+var gulp = require('gulp'),
+    install = require('gulp-install'),
+    conflict = require('gulp-conflict'),
+    template = require('gulp-template'),
+    rename = require('gulp-rename'),
+    _ = require('underscore.string'),
+    inquirer = require('inquirer'),
+    path = require('path');
 
 function format(string) {
-  var username = string ? string.toLowerCase() : '';
-  return username.replace(/\s/g, '');
+    var username = string.toLowerCase();
+    return username.replace(/\s/g, '');
 }
 
 var defaults = (function () {
-  var homeDir = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE,
-      workingDirName = process.cwd().split('/').pop().split('\\').pop(),
-      osUserName = homeDir && homeDir.split('/').pop() || 'root',
-      configFile = homeDir + '/.gitconfig',
-      user = {};
-  if (require('fs').existsSync(configFile)) {
-    user = require('iniparser').parseSync(configFile).user;
-  }
-  return {
-    appName: workingDirName,
-    userName: format(user.name) || osUserName,
-    authorEmail: user.email || ''
-  };
+    var workingDirName = path.basename(process.cwd()),
+      homeDir, osUserName, configFile, user;
+
+    if (process.platform === 'win32') {
+        homeDir = process.env.USERPROFILE;
+        osUserName = process.env.USERNAME || path.basename(homeDir).toLowerCase();
+    }
+    else {
+        homeDir = process.env.HOME || process.env.HOMEPATH;
+        osUserName = homeDir && homeDir.split('/').pop() || 'root';
+    }
+
+    configFile = path.join(homeDir, '.gitconfig');
+    user = {};
+
+    if (require('fs').existsSync(configFile)) {
+        user = require('iniparser').parseSync(configFile).user;
+    }
+
+    return {
+        appName: workingDirName,
+        userName: osUserName || format(user.name || ''),
+        authorName: user.name || '',
+        authorEmail: user.email || ''
+    };
 })();
+
 
 console.log([
     '',
@@ -48,42 +62,49 @@ console.log([
     ''
   ].join('\n'));
 
+
 gulp.task('default', function (done) {
-  var prompts = [{
+    
+    var prompts = [{
       name: 'appName',
       message: 'What is the name of your project?',
       default: defaults.appName
-  }, {
-    name: 'appDescription',
-    message: 'What is the description?'
-  }, {
-    name: 'appVersion',
-    message: 'What is the version of your project?',
-    default: '0.1.0'
-  }, {
-    name: 'authorName',
-    message: 'What is the author name?',
-    default: 'Matheus Thomaz'
-  }, {
-    type: 'list',
-    name: 'selectPreprocessor',
-    message: 'What preprocessor you want to use?',
-    choices: [
-      { name: 'less', value: 'less' },
-    ],
-    default: 0
-  }, {
-    type: 'confirm',
-    name: 'moveon',
-    message: 'Continue?'
-  }];
-  //Ask
-  inquirer.prompt(prompts,
+      }, {
+        name: 'appDescription',
+        message: 'What is the description?'
+      }, {
+        name: 'appVersion',
+        message: 'What is the version of your project?',
+        default: '0.1.0'
+      }, {
+        name: 'authorName',
+        message: 'What is the author name?',
+        default: 'Matheus Thomaz'
+      }, {
+        name: 'authorEmail',
+        message: 'What is the author email?',
+        default: defaults.authorEmail
+      }, {
+        type: 'list',
+        name: 'selectPreprocessor',
+        message: 'What preprocessor you want to use?',
+        choices: [
+          { name: 'less', value: 'less' },
+        ],
+        default: 0
+      }, {
+        type: 'confirm',
+        name: 'moveon',
+        message: 'Continue?'
+      }];
+    
+    inquirer.prompt(prompts,
     function (answers) {
       if (!answers.moveon) {
         return done();
       }
       answers.appNameSlug = _.slugify(answers.appName);
+        
       gulp.src(__dirname + '/templates/' + answers.selectPreprocessor + '/**')
         .pipe(template(answers))
         .pipe(rename(function(file) {
