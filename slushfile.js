@@ -90,6 +90,7 @@ gulp.task('default', function (done) {
         message: 'What preprocessor you want to use?',
         choices: [
           { name: 'less', value: 'less' },
+          { name: 'stylus (jeet, rupture)', value: 'stylus' },
         ],
         default: 0
       }, {
