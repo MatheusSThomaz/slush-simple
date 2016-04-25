@@ -34,9 +34,9 @@ gulp.task('less', function () {
       errorHandler: function (err) {
         console.log([
           'Errrroou!',
+          '    Erro: ' + err.name + '',
+          '  plugin: ' + err.plugin + '',
           'Mensagem: ' + err.message + '',
-          ' Arquivo: ' + err.fileName + '',
-          '   Linha: ' + err.lineNumber + '',
         ].join('\n'));
         this.emit('end');
       }
@@ -72,9 +72,9 @@ gulp.task('js:build', function () {
       errorHandler: function (err) {
         console.log([
           'Errrroou!',
+          '    Erro: ' + err.name + '',
+          '  plugin: ' + err.plugin + '',
           'Mensagem: ' + err.message + '',
-          ' Arquivo: ' + err.fileName + '',
-          '   Linha: ' + err.lineNumber + '',
         ].join('\n'));
         this.emit('end');
       }
