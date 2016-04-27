@@ -8,6 +8,8 @@ var gulp        = require('gulp'),
     changed     = require('gulp-changed'),
     runSequence = require('run-sequence'),
     plumber     = require('gulp-plumber'),
+    svgSymbols  = require('gulp-svg-symbols'),
+    fileinclude = require('gulp-file-include'),
     spritesmith = require('gulp.spritesmith');
 
 var path = {
@@ -15,16 +17,38 @@ var path = {
   less: ['dev/assets/less/**/*.less'],
   css: ['dev/assets/css/**/*.css', '!dev/assets/css/**/*.min.css'],
   img: ['dev/assets/img/**/*'],
-  html: ['dev/**/*.html']
+  html: ['dev/pages/**/*.html', '!dev/pages/partials/*.html']
 };
+
+gulp.task('fileinclude', function() {
+  gulp.src(path.html)
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(gulp.dest('./dev'))
+    .pipe(reload({stream:true}));
+});
 
 gulp.task('sprite', function () {
   var spriteData = gulp.src('assets/img/partials/*.png')
   .pipe(spritesmith({
+    imgPath: 'assets/img/sprite.png',
     imgName: 'sprite.png',
-    cssName: 'sprite.css'
+    cssName: 'sprite.less',
+    cssFormat: 'less',
+    algorithm: 'binary-tree'
   }));
-  return spriteData.pipe(gulp.dest('assets/img/'));
+  spriteData.img.pipe(gulp.dest('assets/img/'));
+  spriteData.css.pipe(gulp.dest('assets/less/'));
+});
+
+gulp.task('spritesvg', function () {
+  return gulp.src('assets/img/svg/*.svg')
+    .pipe(svgSymbols({
+      templates: ['default-svg']
+    }))
+    .pipe(gulp.dest('assets/img'));
 });
 
 gulp.task('less', function () {
@@ -55,14 +79,10 @@ gulp.task('sync', function() {
   });
 });
 
-gulp.task('html', function () {
-  return gulp.src(path.html)
-    .pipe(reload({stream:true}));
-});
 
 gulp.task('watch', function () {
   gulp.watch(path.less, ['less']);
-  gulp.watch(path.html, ['html']);
+  gulp.watch('dev/pages/**/*.html', ['fileinclude']);
 });
 
 gulp.task('js:build', function () {
@@ -93,7 +113,7 @@ gulp.task('move:build', function () {
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('default', ['less', 'watch', 'sync']);
+gulp.task('default', ['less', 'fileinclude', 'watch', 'sync']);
 gulp.task('build', function () {
   runSequence('less', 'js:build', 'move:build');
 });
