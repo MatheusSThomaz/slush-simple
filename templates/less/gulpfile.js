@@ -31,24 +31,24 @@ gulp.task('fileinclude', function() {
 });
 
 gulp.task('sprite', function () {
-  var spriteData = gulp.src('assets/img/partials/*.png')
+  var spriteData = gulp.src('dev/assets/img/partials/*.png')
   .pipe(spritesmith({
-    imgPath: 'assets/img/sprite.png',
+    imgPath: 'dev/assets/img/sprite.png',
     imgName: 'sprite.png',
     cssName: 'sprite.less',
     cssFormat: 'less',
     algorithm: 'binary-tree'
   }));
-  spriteData.img.pipe(gulp.dest('assets/img/'));
-  spriteData.css.pipe(gulp.dest('assets/less/'));
+  spriteData.img.pipe(gulp.dest('dev/assets/img/'));
+  spriteData.css.pipe(gulp.dest('dev/assets/less/'));
 });
 
 gulp.task('spritesvg', function () {
-  return gulp.src('assets/img/svg/*.svg')
+  return gulp.src('dev/assets/img/svg/*.svg')
     .pipe(svgSymbols({
       templates: ['default-svg']
     }))
-    .pipe(gulp.dest('assets/img'));
+    .pipe(gulp.dest('dev/assets/img'));
 });
 
 gulp.task('less', function () {
