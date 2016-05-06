@@ -40,6 +40,12 @@
     "iniparser": "^1.0.5"
   },
   "keywords": [
-    "slushgenerator"
+    "slushgenerator",
+    "Gulp",
+    "less",
+    "stylus",
+    "jeet",
+    "rupture",
+    "kouto swiss"
   ]
 }
