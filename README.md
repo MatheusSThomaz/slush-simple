@@ -1,5 +1,5 @@
-# Slush Simple Project
-[![Build Status](https://secure.travis-ci.org/msthomaz/slush-simple-project.png?branch=master)](https://travis-ci.org/msthomaz/slush-simple-project) 
+# Slush Simple Project 
+[![Build Status](https://secure.travis-ci.org/msthomaz/slush-simple-project.png?branch=develop)](https://travis-ci.org/msthomaz/slush-simple-project) 
 [![NPM version](https://badge-me.herokuapp.com/api/npm/slush-simple-project.png)](http://badges.enytc.com/for/npm/slush-simple-project)
 
 > Basic slush generator that scaffolds and empty project using Stylus and Template system (Jeet, Rupture and Kouto Swiss)
