@@ -68,7 +68,7 @@ gulp.task('stylus', function () {
     }))
     .pipe(stylus({
       compress: true,
-      use: [jeet(), rupture()]
+      use: [jeet(), rupture(), koutoSwiss()]
     }))
     .pipe(gulp.dest('dev/assets/css/'))
     .pipe(reload({stream:true}));
