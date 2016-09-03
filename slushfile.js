@@ -53,7 +53,7 @@ var defaults = (function () {
 
 console.log([
     '',
-    '',
+    '                  Simple',
     '               Slush Generator',
     '            I hope you enjoy it :)',
     '',
@@ -91,6 +91,7 @@ gulp.task('default', function (done) {
         choices: [
           { name: 'less', value: 'less' },
           { name: 'stylus (jeet, rupture)', value: 'stylus' },
+          { name: 'stylus + template (jeet, rupture)', value: 'stylus-template' },
         ],
         default: 0
       }, {

@@ -5,18 +5,31 @@ var gulp        = require('gulp'),
     browserSync = require('browser-sync'),
     reload      = browserSync.reload,
     uglify      = require('gulp-uglify'),
+    concat      = require('gulp-concat'),
     changed     = require('gulp-changed'),
     runSequence = require('run-sequence'),
     plumber     = require('gulp-plumber'),
     svgSymbols  = require('gulp-svg-symbols'),
+    fileinclude = require('gulp-file-include'),
     spritesmith = require('gulp.spritesmith');
 
 var path = {
   js: ['dev/assets/js/**/*.js', '!dev/assets/js/**/*.min.js'],
   stylus: ['dev/assets/stylus/**/*.styl'],
   css: ['dev/assets/css/**/*.css', '!dev/assets/css/**/*.min.css'],
-  img: ['dev/assets/img/**/*']
+  img: ['dev/assets/img/**/*'],
+  html: ['dev/pages/**/*.html', '!dev/pages/partials/*.html']
 };
+
+gulp.task('fileinclude', function() {
+  gulp.src(path.html)
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(gulp.dest('./dev'))
+    .pipe(reload({stream:true}));
+});
 
 gulp.task('sprite', function () {
   var spriteData = gulp.src('dev/assets/img/partials/*.png')
@@ -71,6 +84,38 @@ gulp.task('sync', function() {
 
 gulp.task('watch', function () {
   gulp.watch(path.stylus, ['stylus']);
+  gulp.watch('dev/pages/**/*.html', ['fileinclude']);
+});
+
+gulp.task('js:build', function () {
+  return gulp.src(path.js)
+    .pipe(uglify({outSourceMap: true}))
+    .pipe(plumber({
+      errorHandler: function (err) {
+        console.log([
+          'Errrroou!',
+          '    Erro: ' + err.name + '',
+          '  plugin: ' + err.plugin + '',
+          'Mensagem: ' + err.message + '',
+        ].join('\n'));
+        this.emit('end');
+      }
+    }))
+    .pipe(gulp.dest('build/assets/js/'));
+});
+
+gulp.task('move:build', function () {
+  return gulp.src([
+    'dev/**',
+    '!dev/assets/stylus',
+    '!dev/assets/stylus/**/*.styl',
+    '!dev/assets/js',
+    '!dev/assets/js/**/*.js'
+  ])
+  .pipe(gulp.dest('build/'));
 });
 
 gulp.task('default', ['stylus', 'fileinclude', 'watch', 'sync']);
+gulp.task('build', function () {
+  runSequence('stylus', 'js:build', 'move:build');
+});
