@@ -53,7 +53,7 @@ var defaults = (function () {
 
 console.log([
     '',
-    '                  Simple',
+    '                   Simple',
     '               Slush Generator',
     '            I hope you enjoy it :)',
     '',
