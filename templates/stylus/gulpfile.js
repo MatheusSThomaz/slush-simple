@@ -6,7 +6,6 @@ var gulp        = require('gulp'),
     reload      = browserSync.reload,
     uglify      = require('gulp-uglify'),
     changed     = require('gulp-changed'),
-    runSequence = require('run-sequence'),
     plumber     = require('gulp-plumber'),
     svgSymbols  = require('gulp-svg-symbols'),
     spritesmith = require('gulp.spritesmith');
