@@ -79,7 +79,7 @@ gulp.task('default', function (done) {
       }, {
         name: 'authorName',
         message: 'What is the author name?',
-        default: 'Matheus Thomaz'
+        default: defaults.authorName
       }, {
         name: 'authorEmail',
         message: 'What is the author email?',
