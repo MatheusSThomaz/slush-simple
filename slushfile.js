@@ -45,7 +45,7 @@ var defaults = (function () {
     return {
         appName: workingDirName,
         userName: osUserName || format(user.name || ''),
-        authorName: user.name || '',
+        authorName: osUserName || format(user.name || ''),
         authorEmail: user.email || ''
     };
 })();
