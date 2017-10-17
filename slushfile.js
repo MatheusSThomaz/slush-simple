@@ -89,7 +89,6 @@ gulp.task('default', function (done) {
         name: 'selectPreprocessor',
         message: 'What preprocessor you want to use?',
         choices: [
-          { name: 'less', value: 'less' },
           { name: 'stylus (jeet, rupture)', value: 'stylus' },
           { name: 'stylus + template (jeet, rupture)', value: 'stylus-template' },
         ],
