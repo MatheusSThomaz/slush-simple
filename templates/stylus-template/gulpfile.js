@@ -116,7 +116,7 @@ gulp.task('move:build', function () {
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('default', ['stylus', 'fileinclude', 'watch', 'sync']);
+gulp.task('default', ['stylus', 'fileinclude', 'spritesvg', 'watch', 'sync']);
 gulp.task('build', function () {
   runSequence('stylus', 'js:build', 'move:build');
 });

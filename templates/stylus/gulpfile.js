@@ -73,4 +73,4 @@ gulp.task('watch', function () {
   gulp.watch(path.stylus, ['stylus']);
 });
 
-gulp.task('default', ['stylus', 'watch', 'sync']);
+gulp.task('default', ['stylus', 'watch', 'spritesvg', 'sync']);
