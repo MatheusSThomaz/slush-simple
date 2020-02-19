@@ -10,19 +10,19 @@
   "email" : "<%= authorEmail %>",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.18.13",
+    "browser-sync": "^2.26.7",
     "gulp": "^3.9.1",
-    "gulp-changed": "^3.1.1",
+    "gulp-changed": "^4.0.2",
     "gulp-concat": "^2.6.1",
-    "gulp-file-include": "^1.2.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-stylus": "^2.6.0",
-    "gulp-svg-symbols": "^2.0.2",
-    "gulp-uglify": "^3.0.0",
-    "gulp.spritesmith": "^6.7.0",
+    "gulp-file-include": "^2.1.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-stylus": "^2.7.0",
+    "gulp-svg-symbols": "^3.2.3",
+    "gulp-uglify": "^3.0.2",
+    "gulp.spritesmith": "^6.11.0",
     "jeet": "7.2.0",
     "kouto-swiss": "^1.1.0",
-    "run-sequence": "^2.2.0",
-    "rupture": "^0.6.2"
+    "run-sequence": "^2.2.1",
+    "rupture": "^0.7.1"
   }
 }
