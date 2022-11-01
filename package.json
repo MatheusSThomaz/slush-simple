@@ -29,7 +29,7 @@
     "test": "echo \"No tests\""
   },
   "dependencies": {
-    "gulp": "^3.6.2",
+    "gulp": "^4.0.2",
     "gulp-conflict": "^0.4.0",
     "gulp-install": "^0.1.4",
     "gulp-rename": "^2.0.0",
